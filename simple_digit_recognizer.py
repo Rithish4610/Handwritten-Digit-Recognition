@@ -60,4 +60,91 @@ for i in range(5):
 # 9. SAVE MODEL
 model.save('my_simple_model.h5')
 print("\n✅ Model saved as 'my_simple_model.h5'")
+
+# 10. PREDICT FROM UPLOADED IMAGE
+from PIL import Image
+import os
+
+def predict_uploaded_image(image_path):
+    """
+    Predict digit from an uploaded image file.
+    The image should contain a handwritten digit.
+    """
+    # Load the saved model
+    loaded_model = tf.keras.models.load_model('my_simple_model.h5')
+    
+    # Check if file exists
+    if not os.path.exists(image_path):
+        print(f"❌ Error: File '{image_path}' not found!")
+        return None
+    
+    # Load and preprocess the image
+    img = Image.open(image_path)
+    
+    # Convert to grayscale
+    img = img.convert('L')
+    
+    # Resize to 28x28 pixels (MNIST format)
+    img = img.resize((28, 28))
+    
+    # Convert to numpy array
+    img_array = np.array(img)
+    
+    # MNIST has white digit on black background
+    # If your image has black digit on white background, invert it
+    if np.mean(img_array) > 127:  # Light background detected
+        img_array = 255 - img_array  # Invert colors
+    
+    # Normalize to 0-1 range
+    img_array = img_array / 255.0
+    
+    # Reshape for model input (add batch dimension)
+    img_array = img_array.reshape(1, 28, 28)
+    
+    # Make prediction
+    prediction = loaded_model.predict(img_array, verbose=0)
+    predicted_digit = np.argmax(prediction[0])
+    confidence = prediction[0][predicted_digit] * 100
+    
+    # Display the processed image and prediction
+    plt.figure(figsize=(8, 4))
+    
+    plt.subplot(1, 2, 1)
+    plt.imshow(Image.open(image_path), cmap='gray')
+    plt.title("Original Image")
+    plt.axis('off')
+    
+    plt.subplot(1, 2, 2)
+    plt.imshow(img_array.reshape(28, 28), cmap='gray')
+    plt.title(f"Processed (28x28)")
+    plt.axis('off')
+    
+    plt.suptitle(f"🎯 Predicted Digit: {predicted_digit} (Confidence: {confidence:.1f}%)", fontsize=14)
+    plt.tight_layout()
+    plt.show()
+    
+    print(f"\n🔢 Prediction Results:")
+    print(f"   Predicted Digit: {predicted_digit}")
+    print(f"   Confidence: {confidence:.1f}%")
+    print(f"\n   All probabilities:")
+    for i, prob in enumerate(prediction[0]):
+        bar = "█" * int(prob * 20)
+        print(f"   {i}: {bar} {prob*100:.1f}%")
+    
+    return predicted_digit
+
+# === HOW TO USE ===
+print("\n" + "="*50)
+print("📷 TO PREDICT YOUR OWN HANDWRITTEN DIGIT:")
+print("="*50)
+print("\n1. Save your handwritten digit image")
+print("2. Run this command:")
+print("\n   predict_uploaded_image('your_image.png')")
+print("\n   Example:")
+print("   predict_uploaded_image('my_digit.jpg')")
+print("="*50)
+
+# Uncomment the line below and replace with your image path to test:
+# predict_uploaded_image('your_image_path_here.png')
+
 print("\n🎉 PROJECT COMPLETE! 🎉")
