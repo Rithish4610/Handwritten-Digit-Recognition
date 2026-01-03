@@ -1,32 +1,11 @@
 # 🔢 Handwritten Digit Recognition
 
 A Machine Learning project that recognizes handwritten digits (0-9) using Neural Networks and the MNIST dataset.
-
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-2.20-orange)
-![Accuracy](https://img.shields.io/badge/Accuracy-97.77%25-green)
-
----
-
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-- [How It Works](#how-it-works)
-- [Model Architecture](#model-architecture)
-- [Results](#results)
-- [Tips for Best Results](#tips-for-best-results)
-
----
+-
 
 ## 🎯 Overview
 
 This project uses a **Neural Network** to classify images of handwritten digits into their respective numbers (0-9). It is trained on the famous **MNIST dataset** containing 70,000 grayscale images of handwritten digits.
-
----
 
 ## ✨ Features
 
@@ -36,38 +15,6 @@ This project uses a **Neural Network** to classify images of handwritten digits 
 - ✅ Auto-invert colors (works with both light and dark backgrounds)
 - ✅ Display prediction confidence with probability breakdown
 - ✅ Save and load trained models
-
----
-
-## 📁 Project Structure
-
-```
-HAND WRITTEN DIGIT RECOGNITION/
-│
-├── simple_digit_recognizer.py   # Main training script
-├── predict.py                   # Prediction script for custom images
-├── digit_recognition.ipynb      # Jupyter notebook (CNN version)
-├── my_simple_model.h5           # Saved trained model
-└── README.md                    # This file
-```
-
----
-
-## 🛠️ Installation
-
-### Prerequisites
-- Python 3.11 or compatible version
-- pip (Python package manager)
-
-### Install Dependencies
-
-```bash
-pip install tensorflow pillow matplotlib numpy
-```
-
----
-
-## 🚀 Usage
 
 ### 1. Train the Model
 
@@ -134,62 +81,9 @@ py -3.11 predict.py "C:\Users\rithi\Downloads\my_digit.jpg"
 │  Predicted  │     │   Softmax   │     │   Neural    │     │   Invert    │
 │   Digit     │ ◄── │   Output    │ ◄── │   Network   │ ◄── │  (if needed)│
 └─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
-```
-
----
-
-## 🏗️ Model Architecture
-
-### Simple Dense Network (simple_digit_recognizer.py)
 
 ```
-Layer (type)                Output Shape              Param #
-═══════════════════════════════════════════════════════════════
-Flatten                     (None, 784)               0
-Dense (ReLU)                (None, 128)               100,480
-Dense (Softmax)             (None, 10)                1,290
-═══════════════════════════════════════════════════════════════
-Total params: 101,770
-```
 
-| Layer | Description |
-|-------|-------------|
-| **Flatten** | Converts 28×28 image to 784-element vector |
-| **Dense (128)** | Hidden layer with 128 neurons, ReLU activation |
-| **Dense (10)** | Output layer with 10 neurons (one per digit) |
-
-### CNN Version (digit_recognition.ipynb)
-
-```
-Conv2D(32) → MaxPool → Conv2D(64) → MaxPool → Flatten → Dense(64) → Dense(10)
-```
-
----
-
-## 📊 Results
-
-| Metric | Value |
-|--------|-------|
-| **Training Accuracy** | 98.55% |
-| **Validation Accuracy** | 97.72% |
-| **Test Accuracy** | **97.77%** |
-| **Training Time** | ~30 seconds (5 epochs) |
-
-### Training Progress:
-
-| Epoch | Training Acc | Validation Acc |
-|-------|-------------|----------------|
-| 1 | 92.24% | 96.35% |
-| 2 | 96.49% | 97.25% |
-| 3 | 97.49% | 97.67% |
-| 4 | 98.10% | 97.37% |
-| 5 | 98.55% | 97.72% |
-
----
-
-## 💡 Tips for Best Results
-
-For accurate predictions on your own images:
 
 | Tip | Description |
 |-----|-------------|
@@ -202,8 +96,6 @@ For accurate predictions on your own images:
 
 **Supported Image Formats:** `.png`, `.jpg`, `.jpeg`, `.bmp`
 
----
-
 ## 🔧 Technologies Used
 
 - **Python 3.11** - Programming language
@@ -213,18 +105,3 @@ For accurate predictions on your own images:
 - **Pillow (PIL)** - Image processing
 - **MNIST Dataset** - Training data (70,000 handwritten digit images)
 
----
-
-## 📜 License
-
-This project is open source and available for educational purposes.
-
----
-
-## 🙋 Author
-
-Created as a beginner-friendly Machine Learning project to demonstrate image classification with neural networks.
-
----
-
-**⭐ If this project helped you learn, give it a star!**
